@@ -14,6 +14,7 @@ PROGRAM_NAME='hash'
 INCLUDE 'getMD5_inc_1_1.AXI'
 INCLUDE 'getSHA256_inc_1_0.AXI'
 INCLUDE 'getBASE64_inc_1_2.AXI'
+INCLUDE 'getCRC32_inc_1_0.AXI'
 
 (***********************************************************)
 (*          DEVICE NUMBER DEFINITIONS GO BELOW             *)
@@ -41,6 +42,8 @@ VOLATILE char strMD5[32]
 VOLATILE char strSHA256[64]
 VOLATILE char strBASE64Encode[8192]
 VOLATILE char strBASE64Decode[1024]
+VOLATILE char strCRC32[8]
+VOLATILE char strCRC32B[8]
 
 (***********************************************************)
 (*               LATCHING DEFINITIONS GO BELOW             *)
@@ -80,12 +83,16 @@ DATA_EVENT [dvTP]
 	    strSHA256 = getSHA256(DATA.TEXT)
 	    strBASE64Encode = encodeBASE64(DATA.TEXT)
 	    strBASE64Decode = decodeBASE64(DATA.TEXT)
+	    strCRC32 = getCRC32(DATA.TEXT)
+	    strCRC32B = getCRC32B(DATA.TEXT)
 	    
 	    SEND_COMMAND dvTP,"'^UTF-11,0,',DATA.TEXT"
 	    SEND_COMMAND dvTP,"'^TXT-1,0,',strMD5"
 	    SEND_COMMAND dvTP,"'^TXT-2,0,',strSHA256"
 	    SEND_COMMAND dvTP,"'^TXT-3,0,',strBASE64Encode"
 	    SEND_COMMAND dvTP,"'^TXT-4,0,',strBASE64Decode"
+	    SEND_COMMAND dvTP,"'^TXT-5,0,',strCRC32"
+	    SEND_COMMAND dvTP,"'^TXT-6,0,',strCRC32B"
 	}
     }
 }
