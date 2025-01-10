@@ -80,22 +80,4 @@ DEFINE_FUNCTION char[8] getCRC32B(char strDATA[])
     RETURN strRet
 }
 
-/*
-var crc uint32 = 0xffffffff
-	for _, c := range in {
-		crc = crc ^ (uint32)(c)
-		for i := 0; i < 8; i++ {
-			if crc & 0x1 != 0 {
-				crc = (crc >> 1) ^ 0xEDB88320
-			} else {
-				crc = (crc >> 1)
-			}
-		}Å@
-	}
-	return 0xffffffff ^ crc
-
-*/
-
-
-
 #END_IF
